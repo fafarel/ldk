@@ -224,20 +224,35 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
-// Gestion du mode sombre (optionnel)
+// Gestion du mode sombre (persistant avec icône dynamique)
+function setDarkModeEnabled(enabled) {
+    const shouldEnable = Boolean(enabled);
+    document.body.classList.toggle('dark-mode', shouldEnable);
+    try { localStorage.setItem('darkMode', shouldEnable); } catch (e) {}
+}
+
+function updateDarkModeButtonIcon(button) {
+    const isDark = document.body.classList.contains('dark-mode');
+    button.innerHTML = isDark ? '☀️' : '🌙';
+    button.setAttribute('aria-label', isDark ? 'Basculer en mode clair' : 'Basculer en mode sombre');
+    button.setAttribute('title', isDark ? 'Mode clair' : 'Mode sombre');
+}
+
 function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    const newState = !document.body.classList.contains('dark-mode');
+    setDarkModeEnabled(newState);
+    updateDarkModeButtonIcon(darkModeBtn);
 }
 
-// Vérifier si l'utilisateur a déjà choisi le mode sombre
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
-}
+// État initial depuis localStorage
+try {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+} catch (e) {}
 
-// Ajouter un bouton pour le mode sombre (optionnel)
+// Ajouter un bouton pour le mode sombre
 const darkModeBtn = document.createElement('button');
-darkModeBtn.innerHTML = '🌙';
 darkModeBtn.className = 'dark-mode-btn';
 darkModeBtn.style.cssText = `
     position: fixed;
@@ -254,7 +269,7 @@ darkModeBtn.style.cssText = `
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 `;
-
+updateDarkModeButtonIcon(darkModeBtn);
 darkModeBtn.addEventListener('click', toggleDarkMode);
 document.body.appendChild(darkModeBtn);
 
@@ -458,6 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', function(e) {
         const reservationModal = document.getElementById('reservationModal');
         const partenariatModal = document.getElementById('partenariatModal');
+        const applyModal = document.getElementById('applyModal');
         const newsletterPopup = document.getElementById('newsletterPopup');
         
         if (e.target === reservationModal) {
@@ -465,6 +481,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (e.target === partenariatModal) {
             closePartenariatModal();
+        }
+        if (e.target === applyModal) {
+            closeApplyModal();
         }
         if (e.target === newsletterPopup) {
             closeNewsletterPopup();
@@ -1185,3 +1204,53 @@ window.getLDKStats = getLDKStats;
 window.trackUserInteraction = trackUserInteraction;
 
 console.log('LDK - Système de collecte enrichi avec horodatage et localisation activé ! 🎭🎵🎨📍');
+
+// Modale de candidature (about.html)
+function openApplyModal() {
+    const modal = document.getElementById('applyModal');
+    if (modal) {
+        modal.style.display = 'block';
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        try { trackModalOpen('apply'); } catch (e) {}
+    }
+}
+
+function closeApplyModal() {
+    const modal = document.getElementById('applyModal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        const form = document.getElementById('applyForm');
+        if (form) form.reset();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const applyForm = document.getElementById('applyForm');
+    if (applyForm) {
+        applyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            try {
+                const formData = new FormData(applyForm);
+                const data = Object.fromEntries(formData);
+                if (!data.nom || !data.email || !data.telephone || !data.domaine || !data.message) {
+                    showErrorMessage('Veuillez remplir tous les champs obligatoires.');
+                    return;
+                }
+                showLoading(applyForm);
+                setTimeout(() => {
+                    hideLoading(applyForm);
+                    const saved = saveEnrichedData(data, 'candidature');
+                    showSuccessMessage(applyForm, 'Candidature envoyée avec succès ! Merci pour votre engagement.');
+                    trackFormSubmission('candidature');
+                    setTimeout(closeApplyModal, 2000);
+                }, 1200);
+            } catch (err) {
+                hideLoading(applyForm);
+                showErrorMessage('Erreur lors de l\'envoi de la candidature.');
+            }
+        });
+    }
+});

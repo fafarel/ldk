@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos - LDK | Legendary Dream of Kermess</title>
+    <title>Cœur - LDK | Legendary Dream of Kermess</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -37,6 +37,9 @@
                 <li class="nav-item">
                     <a href="index.html#contact" class="nav-link">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a href="#rejoindre" class="nav-link">Rejoindre l'équipe</a>
+                </li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -50,12 +53,81 @@
     <section class="hero about-hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">À propos de LDK</h1>
+                <h1 class="hero-title">Cœur de LDK</h1>
                 <h2 class="hero-subtitle">L'équipe qui fait avancer le projet</h2>
                 <p class="hero-description">Découvrez les personnes passionnées qui travaillent chaque jour pour faire de LDK un événement exceptionnel pour la jeunesse ivoirienne.</p>
             </div>
         </div>
     </section>
+
+    <!-- Section Rejoindre l'équipe -->
+    <section class="rejoindre-equipe" id="rejoindre">
+        <div class="container">
+            <div class="rejoindre-wrapper">
+                <div class="rejoindre-illustration">
+                    <img src="photoabout/affiche de recrutement.png" alt="Affiche de recrutement LDK">
+                </div>
+                <div class="rejoindre-content">
+                    <h2 class="section-title">Rejoindre l'équipe</h2>
+                    <p>
+                        Tu veux contribuer à un projet culturel ambitieux et porteur d'impact pour la jeunesse ivoirienne ?
+                        Rejoins le cœur de l'organisation LDK et mets tes talents au service d'un événement inoubliable.
+                    </p>
+                    <ul class="rejoindre-points">
+                        <li>Organisation et logistique d'événements</li>
+                        <li>Communication et réseaux sociaux</li>
+                        <li>Partenariats et sponsoring</li>
+                        <li>Création visuelle et audiovisuelle</li>
+                    </ul>
+                    <div class="rejoindre-actions">
+                        <button type="button" class="btn btn-primary" onclick="openApplyModal()">Postuler maintenant</button>
+                        <a class="btn btn-secondary" href="#contact">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modale de Candidature -->
+    <div id="applyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeApplyModal()">&times;</span>
+            <h2>Rejoindre l'équipe LDK</h2>
+            <form id="applyForm" class="reservation-form">
+                <div class="form-group">
+                    <label for="applyNom">Nom complet *</label>
+                    <input type="text" id="applyNom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyEmail">Email *</label>
+                    <input type="email" id="applyEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyTelephone">Téléphone *</label>
+                    <input type="tel" id="applyTelephone" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyDomaine">Domaine souhaité *</label>
+                    <select id="applyDomaine" name="domaine" required>
+                        <option value="">Sélectionnez un domaine</option>
+                        <option value="organisation">Organisation & Logistique</option>
+                        <option value="communication">Communication & Réseaux Sociaux</option>
+                        <option value="partenariats">Partenariats & Sponsoring</option>
+                        <option value="creation">Création visuelle / Audiovisuel</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="applyMessage">Pourquoi veux-tu rejoindre LDK ? *</label>
+                    <textarea id="applyMessage" name="message" rows="4" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeApplyModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Envoyer la candidature</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Section Actionnaires -->
     <section class="actionnaires">

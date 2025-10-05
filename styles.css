@@ -12,6 +12,46 @@ body {
     overflow-x: hidden;
 }
 
+/* Mode sombre */
+.dark-mode {
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+.dark-mode .navbar {
+    background: rgba(15, 23, 42, 0.95);
+}
+.dark-mode .nav-link { color: #e2e8f0; }
+.dark-mode .nav-link:hover { color: #f39c12; }
+.dark-mode .hero {
+    background: linear-gradient(135deg, #0b1226, #101826, #0f172a);
+}
+.dark-mode .section-title { color: #e2e8f0; }
+.dark-mode .stat,
+.dark-mode .artiste-card,
+.dark-mode .billet-card,
+.dark-mode .partenaire-card,
+.dark-mode .membre-card,
+.dark-mode .valeur-card,
+.dark-mode .impact-item {
+    background: #111827;
+    color: #e5e7eb;
+    border-color: #1f2937;
+}
+.dark-mode .footer { background: #0b1226; }
+.dark-mode .footer-section a { color: #cbd5e1; }
+.dark-mode .footer-section a:hover { color: #f39c12; }
+.dark-mode .about { background: #0b1226; }
+.dark-mode .about-hero { background: linear-gradient(135deg, #0b1226, #111827, #0f172a); }
+.dark-mode .parrains,
+.dark-mode .equipe-organisation { background: #0f172a; }
+.dark-mode .actionnaires { background: #0b1226; }
+.dark-mode .valeurs { background: linear-gradient(135deg, #0f172a 0%, #0b1226 100%); }
+.dark-mode .btn-secondary { border-color: #e2e8f0; color: #e2e8f0; }
+.dark-mode .btn-secondary:hover { background: #e2e8f0; color: #111827; }
+
+/* Bouton flottant dark-mode (si injecté) */
+.dark-mode-btn:hover { transform: scale(1.05); }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -133,6 +173,13 @@ body {
     color: white;
     position: relative;
     overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.25));
+    z-index: 0;
 }
 
 .hero-content {
@@ -284,6 +331,22 @@ body {
     background: white;
     color: #2c3e50;
     transform: translateY(-2px);
+}
+.btn-heart {
+    background: radial-gradient(120% 120% at 0% 0%, #ff6b6b, #e74c3c 60%, #c0392b 100%);
+    color: #fff;
+    position: relative;
+    box-shadow: 0 12px 24px rgba(231,76,60,0.35), 0 0 0 0 rgba(231,76,60,0.6);
+    animation: pulseGlow 2.2s infinite;
+}
+.btn-heart:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 32px rgba(231,76,60,0.45);
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 12px 24px rgba(231,76,60,0.35), 0 0 0 0 rgba(231,76,60,0.5); }
+  70% { box-shadow: 0 12px 24px rgba(231,76,60,0.35), 0 0 0 12px rgba(231,76,60,0); }
+  100% { box-shadow: 0 12px 24px rgba(231,76,60,0.35), 0 0 0 0 rgba(231,76,60,0); }
 }
 
 .hero-image {
@@ -1628,6 +1691,12 @@ section {
     text-align: center;
     padding: 120px 0 80px;
 }
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.25));
+}
 
 .about-hero .hero-title {
     font-size: 3rem;
@@ -1832,6 +1901,47 @@ section {
 .equipe-organisation {
     padding: 80px 0;
     background: white;
+}
+
+/* Section Rejoindre l'équipe */
+.rejoindre-equipe {
+    background: #f8f9fa;
+}
+.rejoindre-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+.rejoindre-illustration img {
+    width: 100%;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    object-fit: cover;
+}
+.rejoindre-content p { color: #555; margin-bottom: 1rem; }
+.rejoindre-points {
+    margin: 1rem 0 1.5rem;
+    padding-left: 1rem;
+}
+.rejoindre-points li {
+    margin: 0.35rem 0;
+    list-style: none;
+    position: relative;
+    padding-left: 1.2rem;
+    color: #666;
+}
+.rejoindre-points li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #27ae60;
+    font-weight: 700;
+}
+.rejoindre-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+    .rejoindre-wrapper { grid-template-columns: 1fr; }
 }
 
 .equipe-intro {
