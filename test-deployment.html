@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Déploiement LDK</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .test-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timestamp {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #ffeb3b;
+        }
+
+        .status {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(76, 175, 80, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-box">
+        <h1>🎭 Test de Déploiement LDK</h1>
+        <div class="status">✅ Déploiement réussi !</div>
+        <p>Si vous voyez cette page, le déploiement automatique fonctionne.</p>
+        <div class="timestamp">
+            Dernière mise à jour : <span id="timestamp"></span>
+        </div>
+        <p><a href="index.html" style="color: #ffeb3b;">← Retour au site principal</a></p>
+    </div>
+
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('fr-FR');
+    </script>
+</body>
+
+</html>
