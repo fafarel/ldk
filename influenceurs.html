@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -134,3 +135,141 @@
 
 
 
+=======
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDK - Espace Influenceurs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logooldk/logo-ldk.png.png" alt="Logo LDK" class="nav-logo-img">
+                <div class="logo-text">
+                    <h2>LDK</h2>
+                    <span class="logo-subtitle">Legendary Dream of Kermess</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html#accueil" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="index.html#programme" class="nav-link">Programme</a></li>
+                <li class="nav-item"><a href="index.html#activites" class="nav-link">Activités</a></li>
+                <li class="nav-item"><a href="index.html#partenaires" class="nav-link">Partenaires</a></li>
+                <li class="nav-item"><a href="index.html#billets" class="nav-link">Billets</a></li>
+                <li class="nav-item"><a href="influenceurs.html" class="nav-link">Influenceurs</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="influenceurs" style="padding-top:120px;">
+        <div class="container">
+            <h2 class="section-title">Espace Influenceurs</h2>
+            <div class="influenceurs-grid">
+                <div class="influenceur-card">
+                    <div class="influencer-media">
+                        <img src="photoamb/Orianne Ouattara.jpg" alt="Orianne Ouattara">
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Orianne Ouattara</h3>
+                        <a class="follow-btn" href="https://www.tiktok.com/@oriane_ouattara?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
+
+                <div class="influenceur-card">
+                    <div class="influencer-media">
+                        <video src="photoamb/Kemenn.mp4" preload="metadata" muted playsinline></video>
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Kemenn</h3>
+                        <a class="follow-btn" href="https://www.tiktok.com/@kemennnn_nn?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
+
+                <div class="influenceur-card">
+                    <div class="influencer-media">
+                        <video src="photoamb/Carla.mp4" preload="metadata" muted playsinline></video>
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Carla</h3>
+                        <a class="follow-btn" href="https://www.tiktok.com/@carlaa_gmr?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
+
+                <div class="influenceur-card">
+                    <div class="influencer-media">
+                        <img src="photoamb/Maurel.jpg" alt="Maurel">
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Maurel</h3>
+                        <a class="follow-btn" href="https://www.tiktok.com/@maurelirina?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logooldk/logo-ldk.png.png" alt="Logo LDK" class="footer-logo-img">
+                    </div>
+                    <h3>LDK</h3>
+                    <p>Legendary Dream of Kermess</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html#accueil">Accueil</a></li>
+                        <li><a href="index.html#programme">Programme</a></li>
+                        <li><a href="index.html#activites">Activités</a></li>
+                        <li><a href="index.html#partenaires">Partenaires</a></li>
+                        <li><a href="index.html#billets">Billets</a></li>
+                        <li><a href="influenceurs.html">Influenceurs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LDK - Legendary Dream of Kermess. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Lecture/pause des vidéos au survol
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('.influenceur-card').forEach(card => {
+                const video = card.querySelector('video');
+                if (!video) return;
+                card.addEventListener('mouseenter', () => { try { video.play(); } catch(e){} });
+                card.addEventListener('mouseleave', () => { try { video.pause(); video.currentTime = 0; } catch(e){} });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39

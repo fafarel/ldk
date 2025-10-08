@@ -257,7 +257,11 @@ darkModeBtn.className = 'dark-mode-btn';
 darkModeBtn.style.cssText = `
     position: fixed;
     top: 20px;
+<<<<<<< HEAD
     left: 20px;
+=======
+    right: 20px;
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
     z-index: 1001;
     background: rgba(255,255,255,0.9);
     border: none;
@@ -504,13 +508,17 @@ function getUserLocation() {
             return;
         }
 
+<<<<<<< HEAD
         // Essayer d'abord la géolocalisation rapide
+=======
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const location = {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                     accuracy: position.coords.accuracy,
+<<<<<<< HEAD
                     timestamp: position.timestamp,
                     source: 'geolocation'
                 };
@@ -523,10 +531,16 @@ function getUserLocation() {
                     console.warn('Impossible de sauvegarder la localisation:', e);
                 }
                 
+=======
+                    timestamp: position.timestamp
+                };
+                console.log('Localisation obtenue:', location);
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
                 resolve(location);
             },
             (error) => {
                 console.warn('Erreur de géolocalisation:', error.message);
+<<<<<<< HEAD
                 
                 // Essayer de récupérer une localisation précédemment sauvegardée
                 try {
@@ -552,6 +566,13 @@ function getUserLocation() {
             {
                 enableHighAccuracy: false, // Plus rapide
                 timeout: 5000, // Timeout plus court
+=======
+                resolve(null);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
                 maximumAge: 300000 // 5 minutes
             }
         );
@@ -622,6 +643,7 @@ async function initializeLocationSystem() {
         // Obtenir le fuseau horaire
         timezone = getTimezone();
         
+<<<<<<< HEAD
         // Vérifier d'abord si on a une localisation récente sauvegardée
         try {
             const savedLocation = localStorage.getItem('ldk_user_location');
@@ -655,11 +677,21 @@ async function initializeLocationSystem() {
         // Créer un indicateur visuel pour la géolocalisation
         createLocationIndicator();
         
+=======
+        // Demander la géolocalisation (avec consentement)
+        userLocation = await getUserLocation();
+        
+        console.log('Système de localisation initialisé:', {
+            timezone: timezone,
+            location: userLocation ? 'Obtenue' : 'Non disponible'
+        });
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
     } catch (error) {
         console.warn('Erreur lors de l\'initialisation de la localisation:', error);
     }
 }
 
+<<<<<<< HEAD
 // Fonction pour créer un indicateur de géolocalisation
 function createLocationIndicator() {
     const indicator = document.createElement('div');
@@ -699,6 +731,8 @@ function createLocationIndicator() {
     }, 5000);
 }
 
+=======
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
 // Fonction enrichie pour sauvegarder les données
 function saveEnrichedData(data, type) {
     try {
@@ -790,6 +824,7 @@ function saveNewsletterData(data) {
     return saveEnrichedData(data, 'newsletter');
 }
 
+<<<<<<< HEAD
 // Fonction pour analyser les données de géolocalisation
 function analyzeLocationData(allData) {
     const locationStats = {
@@ -875,6 +910,24 @@ function exportCollectedData() {
                 totalNewsletters: newsletters.length,
                 totalInteractions: interactions.length,
                 locationStats: locationStats
+=======
+// Fonction d'export enrichie
+function exportCollectedData() {
+    try {
+        const data = {
+            reservations: JSON.parse(localStorage.getItem('ldk_reservations') || '[]'),
+            partenariats: JSON.parse(localStorage.getItem('ldk_partenariats') || '[]'),
+            contacts: JSON.parse(localStorage.getItem('ldk_contacts') || '[]'),
+            newsletters: JSON.parse(localStorage.getItem('ldk_newsletters') || '[]'),
+            interactions: JSON.parse(localStorage.getItem('ldk_interactions') || '[]'),
+            exportDate: createEnrichedTimestamp(),
+            summary: {
+                totalReservations: JSON.parse(localStorage.getItem('ldk_reservations') || '[]').length,
+                totalPartenariats: JSON.parse(localStorage.getItem('ldk_partenariats') || '[]').length,
+                totalContacts: JSON.parse(localStorage.getItem('ldk_contacts') || '[]').length,
+                totalNewsletters: JSON.parse(localStorage.getItem('ldk_newsletters') || '[]').length,
+                totalInteractions: JSON.parse(localStorage.getItem('ldk_interactions') || '[]').length
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
             }
         };
         
@@ -1363,6 +1416,7 @@ function showErrorMessage(message) {
 }
 
 // Ajouter les nouvelles fonctions à la console
+<<<<<<< HEAD
 // Fonction pour forcer la mise à jour de la géolocalisation
 async function updateUserLocation() {
     try {
@@ -1406,6 +1460,9 @@ function showLocationInfo() {
 window.exportLDKData = exportCollectedData;
 window.updateLocation = updateUserLocation;
 window.showLocationInfo = showLocationInfo;
+=======
+window.exportLDKData = exportCollectedData;
+>>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
 window.getLDKStats = getLDKStats;
 window.trackUserInteraction = trackUserInteraction;
 
