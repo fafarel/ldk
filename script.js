@@ -257,11 +257,7 @@ darkModeBtn.className = 'dark-mode-btn';
 darkModeBtn.style.cssText = `
     position: fixed;
     top: 20px;
-<<<<<<< HEAD
     left: 20px;
-=======
-    right: 20px;
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
     z-index: 1001;
     background: rgba(255,255,255,0.9);
     border: none;
@@ -508,17 +504,13 @@ function getUserLocation() {
             return;
         }
 
-<<<<<<< HEAD
         // Essayer d'abord la géolocalisation rapide
-=======
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const location = {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                     accuracy: position.coords.accuracy,
-<<<<<<< HEAD
                     timestamp: position.timestamp,
                     source: 'geolocation'
                 };
@@ -531,16 +523,10 @@ function getUserLocation() {
                     console.warn('Impossible de sauvegarder la localisation:', e);
                 }
                 
-=======
-                    timestamp: position.timestamp
-                };
-                console.log('Localisation obtenue:', location);
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
                 resolve(location);
             },
             (error) => {
                 console.warn('Erreur de géolocalisation:', error.message);
-<<<<<<< HEAD
                 
                 // Essayer de récupérer une localisation précédemment sauvegardée
                 try {
@@ -566,13 +552,6 @@ function getUserLocation() {
             {
                 enableHighAccuracy: false, // Plus rapide
                 timeout: 5000, // Timeout plus court
-=======
-                resolve(null);
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 10000,
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
                 maximumAge: 300000 // 5 minutes
             }
         );
@@ -643,7 +622,6 @@ async function initializeLocationSystem() {
         // Obtenir le fuseau horaire
         timezone = getTimezone();
         
-<<<<<<< HEAD
         // Vérifier d'abord si on a une localisation récente sauvegardée
         try {
             const savedLocation = localStorage.getItem('ldk_user_location');
@@ -677,21 +655,11 @@ async function initializeLocationSystem() {
         // Créer un indicateur visuel pour la géolocalisation
         createLocationIndicator();
         
-=======
-        // Demander la géolocalisation (avec consentement)
-        userLocation = await getUserLocation();
-        
-        console.log('Système de localisation initialisé:', {
-            timezone: timezone,
-            location: userLocation ? 'Obtenue' : 'Non disponible'
-        });
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
     } catch (error) {
         console.warn('Erreur lors de l\'initialisation de la localisation:', error);
     }
 }
 
-<<<<<<< HEAD
 // Fonction pour créer un indicateur de géolocalisation
 function createLocationIndicator() {
     const indicator = document.createElement('div');
@@ -731,8 +699,6 @@ function createLocationIndicator() {
     }, 5000);
 }
 
-=======
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
 // Fonction enrichie pour sauvegarder les données
 function saveEnrichedData(data, type) {
     try {
@@ -824,7 +790,6 @@ function saveNewsletterData(data) {
     return saveEnrichedData(data, 'newsletter');
 }
 
-<<<<<<< HEAD
 // Fonction pour analyser les données de géolocalisation
 function analyzeLocationData(allData) {
     const locationStats = {
@@ -910,24 +875,6 @@ function exportCollectedData() {
                 totalNewsletters: newsletters.length,
                 totalInteractions: interactions.length,
                 locationStats: locationStats
-=======
-// Fonction d'export enrichie
-function exportCollectedData() {
-    try {
-        const data = {
-            reservations: JSON.parse(localStorage.getItem('ldk_reservations') || '[]'),
-            partenariats: JSON.parse(localStorage.getItem('ldk_partenariats') || '[]'),
-            contacts: JSON.parse(localStorage.getItem('ldk_contacts') || '[]'),
-            newsletters: JSON.parse(localStorage.getItem('ldk_newsletters') || '[]'),
-            interactions: JSON.parse(localStorage.getItem('ldk_interactions') || '[]'),
-            exportDate: createEnrichedTimestamp(),
-            summary: {
-                totalReservations: JSON.parse(localStorage.getItem('ldk_reservations') || '[]').length,
-                totalPartenariats: JSON.parse(localStorage.getItem('ldk_partenariats') || '[]').length,
-                totalContacts: JSON.parse(localStorage.getItem('ldk_contacts') || '[]').length,
-                totalNewsletters: JSON.parse(localStorage.getItem('ldk_newsletters') || '[]').length,
-                totalInteractions: JSON.parse(localStorage.getItem('ldk_interactions') || '[]').length
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
             }
         };
         
@@ -1416,7 +1363,6 @@ function showErrorMessage(message) {
 }
 
 // Ajouter les nouvelles fonctions à la console
-<<<<<<< HEAD
 // Fonction pour forcer la mise à jour de la géolocalisation
 async function updateUserLocation() {
     try {
@@ -1456,13 +1402,285 @@ function showLocationInfo() {
     }
 }
 
+// Système de géolocalisation et horodatage
+let userLocation = null;
+let timezone = null;
+
+// Fonction pour obtenir la géolocalisation
+function getUserLocation() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            console.warn('Géolocalisation non supportée par ce navigateur');
+            resolve(null);
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const location = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    accuracy: position.coords.accuracy,
+                    timestamp: position.timestamp,
+                    source: 'geolocation'
+                };
+                console.log('Localisation obtenue:', location);
+                
+                // Sauvegarder la localisation pour réutilisation
+                try {
+                    localStorage.setItem('ldk_user_location', JSON.stringify(location));
+                } catch (e) {
+                    console.warn('Impossible de sauvegarder la localisation:', e);
+                }
+                
+                resolve(location);
+            },
+            (error) => {
+                console.warn('Erreur de géolocalisation:', error.message);
+                
+                // Essayer de récupérer une localisation précédemment sauvegardée
+                try {
+                    const savedLocation = localStorage.getItem('ldk_user_location');
+                    if (savedLocation) {
+                        const parsedLocation = JSON.parse(savedLocation);
+                        const now = Date.now();
+                        const locationAge = now - parsedLocation.timestamp;
+                        
+                        // Si la localisation a moins de 1 heure, l'utiliser
+                        if (locationAge < 3600000) {
+                            console.log('Utilisation de la localisation sauvegardée:', parsedLocation);
+                            resolve(parsedLocation);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Erreur lors de la récupération de la localisation sauvegardée:', e);
+                }
+                
+                resolve(null);
+            },
+            {
+                enableHighAccuracy: false,
+                timeout: 5000,
+                maximumAge: 300000
+            }
+        );
+    });
+}
+
+// Fonction pour obtenir le fuseau horaire
+function getTimezone() {
+    try {
+        return Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (error) {
+        console.warn('Impossible d\'obtenir le fuseau horaire:', error);
+        return 'UTC';
+    }
+}
+
+// Initialisation du système de localisation
+async function initializeLocationSystem() {
+    try {
+        timezone = getTimezone();
+        
+        // Vérifier d'abord si on a une localisation récente sauvegardée
+        try {
+            const savedLocation = localStorage.getItem('ldk_user_location');
+            if (savedLocation) {
+                const parsedLocation = JSON.parse(savedLocation);
+                const now = Date.now();
+                const locationAge = now - parsedLocation.timestamp;
+                
+                // Si la localisation a moins de 30 minutes, l'utiliser immédiatement
+                if (locationAge < 1800000) {
+                    userLocation = parsedLocation;
+                    console.log('Localisation récupérée depuis le cache:', userLocation);
+                }
+            }
+        } catch (e) {
+            console.warn('Erreur lors de la récupération de la localisation sauvegardée:', e);
+        }
+        
+        // Demander une nouvelle géolocalisation en arrière-plan
+        const newLocation = await getUserLocation();
+        if (newLocation) {
+            userLocation = newLocation;
+        }
+        
+        console.log('Système de localisation initialisé:', {
+            timezone: timezone,
+            location: userLocation ? `${userLocation.latitude}, ${userLocation.longitude}` : 'Non disponible',
+            accuracy: userLocation ? `${Math.round(userLocation.accuracy)}m` : 'N/A'
+        });
+        
+    } catch (error) {
+        console.warn('Erreur lors de l\'initialisation de la localisation:', error);
+    }
+}
+
+// Fonction enrichie pour sauvegarder les données
+function saveEnrichedData(data, type) {
+    try {
+        const enrichedData = {
+            ...data,
+            metadata: {
+                timestamp: new Date().toISOString(),
+                location: userLocation,
+                timezone: timezone,
+                browser: navigator.userAgent,
+                sessionId: Date.now().toString()
+            },
+            type: type
+        };
+
+        const storageKey = `ldk_${type}s`;
+        const existingData = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        existingData.push(enrichedData);
+        localStorage.setItem(storageKey, JSON.stringify(existingData));
+
+        console.log(`${type} sauvegardé avec métadonnées enrichies`);
+        return enrichedData;
+    } catch (error) {
+        console.warn(`Impossible de sauvegarder les données de ${type}:`, error);
+        return null;
+    }
+}
+
+// Fonction d'export enrichie
+function exportCollectedData() {
+    try {
+        const reservations = JSON.parse(localStorage.getItem('ldk_reservations') || '[]');
+        const partenariats = JSON.parse(localStorage.getItem('ldk_partenariats') || '[]');
+        const contacts = JSON.parse(localStorage.getItem('ldk_contacts') || '[]');
+        const newsletters = JSON.parse(localStorage.getItem('ldk_newsletters') || '[]');
+        
+        const data = {
+            reservations: reservations,
+            partenariats: partenariats,
+            contacts: contacts,
+            newsletters: newsletters,
+            exportDate: new Date().toISOString(),
+            currentLocation: userLocation,
+            summary: {
+                totalReservations: reservations.length,
+                totalPartenariats: partenariats.length,
+                totalContacts: contacts.length,
+                totalNewsletters: newsletters.length
+            }
+        };
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ldk_data_enriched_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        console.log('Données exportées avec succès');
+    } catch (error) {
+        console.error('Erreur lors de l\'export:', error);
+    }
+}
+
+// Fonction pour forcer la mise à jour de la géolocalisation
+async function updateUserLocation() {
+    try {
+        console.log('Mise à jour de la géolocalisation...');
+        const newLocation = await getUserLocation();
+        if (newLocation) {
+            userLocation = newLocation;
+            console.log('Géolocalisation mise à jour:', userLocation);
+            return userLocation;
+        } else {
+            console.warn('Impossible de mettre à jour la géolocalisation');
+            return null;
+        }
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour de la géolocalisation:', error);
+        return null;
+    }
+}
+
+// Fonction pour afficher les informations de géolocalisation
+function showLocationInfo() {
+    const info = {
+        currentLocation: userLocation,
+        timezone: timezone,
+        lastUpdate: userLocation ? new Date(userLocation.timestamp).toLocaleString() : 'Jamais',
+        accuracy: userLocation ? `${Math.round(userLocation.accuracy)}m` : 'N/A'
+    };
+    
+    console.log('=== Informations de Géolocalisation ===');
+    console.log(JSON.stringify(info, null, 2));
+    
+    if (userLocation) {
+        alert(`📍 Géolocalisation actuelle:\nLatitude: ${userLocation.latitude}\nLongitude: ${userLocation.longitude}\nPrécision: ${Math.round(userLocation.accuracy)}m\nDernière mise à jour: ${new Date(userLocation.timestamp).toLocaleString()}`);
+    } else {
+        alert('📍 Géolocalisation non disponible. Veuillez autoriser l\'accès à votre position.');
+    }
+}
+
+// Gestion du mode sombre
+function setDarkModeEnabled(enabled) {
+    const shouldEnable = Boolean(enabled);
+    document.body.classList.toggle('dark-mode', shouldEnable);
+    try { localStorage.setItem('darkMode', shouldEnable); } catch (e) {}
+}
+
+function updateDarkModeButtonIcon(button) {
+    const isDark = document.body.classList.contains('dark-mode');
+    button.innerHTML = isDark ? '☀️' : '🌙';
+    button.setAttribute('aria-label', isDark ? 'Basculer en mode clair' : 'Basculer en mode sombre');
+    button.setAttribute('title', isDark ? 'Mode clair' : 'Mode sombre');
+}
+
+function toggleDarkMode() {
+    const newState = !document.body.classList.contains('dark-mode');
+    setDarkModeEnabled(newState);
+    updateDarkModeButtonIcon(darkModeBtn);
+}
+
+// État initial depuis localStorage
+try {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+} catch (e) {}
+
+// Ajouter un bouton pour le mode sombre
+const darkModeBtn = document.createElement('button');
+darkModeBtn.className = 'dark-mode-btn';
+darkModeBtn.style.cssText = `
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+`;
+updateDarkModeButtonIcon(darkModeBtn);
+darkModeBtn.addEventListener('click', toggleDarkMode);
+document.body.appendChild(darkModeBtn);
+
+// Initialiser le système au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    initializeLocationSystem();
+});
+
 // Exposer les fonctions globalement pour la console
 window.exportLDKData = exportCollectedData;
 window.updateLocation = updateUserLocation;
 window.showLocationInfo = showLocationInfo;
-=======
-window.exportLDKData = exportCollectedData;
->>>>>>> d77b58c989bd6437bf8ff57f4cf6c805d22e4c39
+window.updateLocation = updateUserLocation;
+window.showLocationInfo = showLocationInfo;
 window.getLDKStats = getLDKStats;
 window.trackUserInteraction = trackUserInteraction;
 
