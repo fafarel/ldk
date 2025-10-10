@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Géolocalisation - LDK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .test-section {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .test-section.success {
+            border-left-color: #28a745;
+        }
+
+        .test-section.error {
+            border-left-color: #dc3545;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: #007bff;
+        }
+
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffc107;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-globe"></i> Test de Géolocalisation LDK</h1>
+        <p>Vérification du système de tracking des visiteurs</p>
+
+        <div class="test-section">
+            <h3><i class="fas fa-info-circle"></i> État du Tracking</h3>
+            <div id="trackingStatus">
+                <i class="fas fa-spinner fa-spin"></i> Vérification en cours...
+            </div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-number" id="totalVisitors">0</div>
+                <div class="stat-label">Visiteurs Total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueCountries">0</div>
+                <div class="stat-label">Pays Uniques</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueCities">0</div>
+                <div class="stat-label">Villes Uniques</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueBrowsers">0</div>
+                <div class="stat-label">Navigateurs</div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3><i class="fas fa-map-marker-alt"></i> Test de Géolocalisation</h3>
+            <p>Cliquez sur le bouton pour tester la géolocalisation :</p>
+            <button class="btn btn-primary" onclick="testGeolocation()">
+                <i class="fas fa-location-arrow"></i> Tester la Géolocalisation
+            </button>
+            <div id="geoResult" style="margin-top: 15px;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3><i class="fas fa-database"></i> Données des Visiteurs</h3>
+            <button class="btn" onclick="showVisitorData()">
+                <i class="fas fa-eye"></i> Afficher les Données
+            </button>
+            <button class="btn btn-primary" onclick="clearVisitorData()">
+                <i class="fas fa-trash"></i> Effacer les Données
+            </button>
+            <div id="visitorData" style="margin-top: 15px;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3><i class="fas fa-chart-bar"></i> Statistiques Détaillées</h3>
+            <div id="detailedStats"></div>
+        </div>
+
+        <div class="test-section">
+            <h3><i class="fas fa-link"></i> Liens Utiles</h3>
+            <p>
+                <a href="admin-simple.html" style="color: #ffc107; text-decoration: none;">
+                    <i class="fas fa-cog"></i> Interface Admin
+                </a> |
+                <a href="index.html" style="color: #ffc107; text-decoration: none;">
+                    <i class="fas fa-home"></i> Page d'Accueil
+                </a> |
+                <a href="derives.html" style="color: #ffc107; text-decoration: none;">
+                    <i class="fas fa-users"></i> Dérivés LDK
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script src="geolocation-tracker.js"></script>
+    <script>
+        // Vérifier l'état du tracking au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkTrackingStatus, 1000);
+        });
+
+        function checkTrackingStatus() {
+            const statusDiv = document.getElementById('trackingStatus');
+            
+            if (typeof window.LDKGeoTracker !== 'undefined') {
+                statusDiv.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                    <strong>Tracking activé</strong> - Système de géolocalisation opérationnel
+                `;
+                statusDiv.parentElement.classList.add('success');
+                updateStats();
+                showDetailedStats();
+            } else {
+                statusDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle" style="color: #dc3545;"></i>
+                    <strong>Tracking non détecté</strong> - Vérifiez que le script est chargé
+                `;
+                statusDiv.parentElement.classList.add('error');
+            }
+        }
+
+        function updateStats() {
+            if (typeof window.LDKGeoTracker === 'undefined') return;
+            
+            const stats = window.LDKGeoTracker.getStats();
+            document.getElementById('totalVisitors').textContent = stats.total;
+            document.getElementById('uniqueCountries').textContent = Object.keys(stats.countries).length;
+            document.getElementById('uniqueCities').textContent = Object.keys(stats.cities).length;
+            document.getElementById('uniqueBrowsers').textContent = Object.keys(stats.browsers).length;
+            
+            document.getElementById('statsGrid').style.display = 'grid';
+        }
+
+        function testGeolocation() {
+            const resultDiv = document.getElementById('geoResult');
+            resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Test en cours...';
+            
+            if (typeof window.LDKGeoTracker !== 'undefined') {
+                window.LDKGeoTracker.track();
+                
+                setTimeout(() => {
+                    resultDiv.innerHTML = `
+                        <div style="color: #28a745;">
+                            <i class="fas fa-check-circle"></i>
+                            <strong>Test réussi !</strong> Le tracking a été exécuté.
+                        </div>
+                        <small>Vérifiez les données des visiteurs ci-dessous.</small>
+                    `;
+                    updateStats();
+                    showVisitorData();
+                }, 2000);
+            } else {
+                resultDiv.innerHTML = `
+                    <div style="color: #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Erreur :</strong> Le tracker n'est pas disponible.
+                    </div>
+                `;
+            }
+        }
+
+        function showVisitorData() {
+            const dataDiv = document.getElementById('visitorData');
+            
+            try {
+                const visitors = JSON.parse(localStorage.getItem('ldk_visitors') || '[]');
+                
+                if (visitors.length === 0) {
+                    dataDiv.innerHTML = `
+                        <div class="code-block">
+                            Aucune donnée de visiteur disponible.
+                            Le tracking se déclenche automatiquement lors de la visite des pages.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '<div class="code-block">';
+                html += `Total des visiteurs: ${visitors.length}\n\n`;
+                html += 'Derniers visiteurs:\n';
+                
+                visitors.slice(-5).reverse().forEach((visitor, index) => {
+                    html += `\n${index + 1}. ${visitor.country} - ${visitor.city}\n`;
+                    html += `   Navigateur: ${visitor.browser}\n`;
+                    html += `   Date: ${new Date(visitor.timestamp).toLocaleString('fr-FR')}\n`;
+                });
+                
+                html += '</div>';
+                dataDiv.innerHTML = html;
+                
+            } catch (error) {
+                dataDiv.innerHTML = `
+                    <div style="color: #dc3545;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Erreur lors de la lecture des données: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        function clearVisitorData() {
+            if (confirm('Êtes-vous sûr de vouloir effacer toutes les données de visiteurs ?')) {
+                localStorage.removeItem('ldk_visitors');
+                document.getElementById('visitorData').innerHTML = `
+                    <div style="color: #28a745;">
+                        <i class="fas fa-check-circle"></i>
+                        Données effacées avec succès.
+                    </div>
+                `;
+                updateStats();
+            }
+        }
+
+        function showDetailedStats() {
+            if (typeof window.LDKGeoTracker === 'undefined') return;
+            
+            const stats = window.LDKGeoTracker.getStats();
+            const statsDiv = document.getElementById('detailedStats');
+            
+            let html = '<div class="code-block">';
+            
+            if (Object.keys(stats.countries).length > 0) {
+                html += 'TOP PAYS:\n';
+                Object.entries(stats.countries)
+                    .sort(([,a], [,b]) => b - a)
+                    .slice(0, 5)
+                    .forEach(([country, count]) => {
+                        html += `• ${country}: ${count} visiteur${count > 1 ? 's' : ''}\n`;
+                    });
+                html += '\n';
+            }
+            
+            if (Object.keys(stats.browsers).length > 0) {
+                html += 'NAVIGATEURS:\n';
+                Object.entries(stats.browsers)
+                    .sort(([,a], [,b]) => b - a)
+                    .forEach(([browser, count]) => {
+                        html += `• ${browser}: ${count} visiteur${count > 1 ? 's' : ''}\n`;
+                    });
+                html += '\n';
+            }
+            
+            if (stats.recent.length > 0) {
+                html += 'VISITES RÉCENTES:\n';
+                stats.recent.slice(0, 3).forEach((visitor, index) => {
+                    html += `${index + 1}. ${visitor.country} - ${visitor.city} (${visitor.browser})\n`;
+                });
+            }
+            
+            html += '</div>';
+            statsDiv.innerHTML = html;
+        }
+
+        // Mettre à jour les stats toutes les 5 secondes
+        setInterval(() => {
+            if (typeof window.LDKGeoTracker !== 'undefined') {
+                updateStats();
+                showDetailedStats();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

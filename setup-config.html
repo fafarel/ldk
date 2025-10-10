@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration LDK Admin - Assistant de Configuration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #667eea;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .step h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .link-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .link-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cog"></i> Configuration LDK Admin</h1>
+            <p>Assistant de configuration pour l'intégration Google Sheets</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight">
+                <strong>⚠️ Important :</strong> Avant de commencer, assurez-vous d'avoir un compte Google et d'être connecté à Google Cloud Console.
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">1</span>Créer un Projet Google Cloud</h3>
+                <p>Créez un nouveau projet dans Google Cloud Console pour gérer vos APIs.</p>
+                <div class="links">
+                    <div class="link-card">
+                        <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a>
+                    </div>
+                </div>
+                <p><strong>Actions :</strong></p>
+                <ul>
+                    <li>Cliquez sur "NOUVEAU PROJET"</li>
+                    <li>Nom : <code>LDK-Admin-Sheets</code></li>
+                    <li>Cliquez sur "CRÉER"</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span>Activer les APIs</h3>
+                <p>Activez les APIs nécessaires pour l'intégration Google Sheets.</p>
+                <div class="links">
+                    <div class="link-card">
+                        <a href="https://console.cloud.google.com/apis/library/sheets.googleapis.com" target="_blank">Google Sheets API</a>
+                    </div>
+                    <div class="link-card">
+                        <a href="https://console.cloud.google.com/apis/library/drive.googleapis.com" target="_blank">Google Drive API</a>
+                    </div>
+                </div>
+                <p><strong>Actions :</strong></p>
+                <ul>
+                    <li>Cliquez sur chaque lien ci-dessus</li>
+                    <li>Cliquez sur "ACTIVER" pour chaque API</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Créer les Identifiants</h3>
+                <p>Créez une clé API et un Client ID OAuth 2.0.</p>
+                <div class="links">
+                    <div class="link-card">
+                        <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Identifiants</a>
+                    </div>
+                </div>
+                
+                <h4>3.1. Créer une Clé API</h4>
+                <ul>
+                    <li>Cliquez sur "CRÉER DES IDENTIFIANTS" > "Clé API"</li>
+                    <li>Copiez la clé générée</li>
+                </ul>
+
+                <h4>3.2. Configurer l'Écran de Consentement OAuth</h4>
+                <ul>
+                    <li>Allez dans "APIs & Services" > "Écran de consentement OAuth"</li>
+                    <li>Choisissez "Externe"</li>
+                    <li>Remplissez les champs obligatoires</li>
+                </ul>
+
+                <h4>3.3. Créer un Client ID OAuth 2.0</h4>
+                <ul>
+                    <li>Retournez aux "Identifiants"</li>
+                    <li>Cliquez sur "CRÉER DES IDENTIFIANTS" > "ID client OAuth 2.0"</li>
+                    <li>Type : "Application Web"</li>
+                    <li>Ajoutez <code>http://localhost</code> aux URIs de redirection</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">4</span>Configurer le Fichier</h3>
+                <p>Entrez vos clés API pour générer le fichier de configuration.</p>
+                
+                <div class="form-group">
+                    <label for="apiKey">Clé API Google :</label>
+                    <input type="text" id="apiKey" placeholder="AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                    <small>Format : commence par "AIza"</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="clientId">Client ID OAuth 2.0 :</label>
+                    <input type="text" id="clientId" placeholder="123456789-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com">
+                    <small>Format : se termine par ".apps.googleusercontent.com"</small>
+                </div>
+
+                <button class="btn btn-primary" onclick="generateConfig()">Générer la Configuration</button>
+                <button class="btn btn-success" onclick="downloadConfig()" id="downloadBtn" disabled>Télécharger le Fichier</button>
+
+                <div id="status" class="status"></div>
+
+                <div id="configPreview" class="code-block" style="display: none;">
+                    <pre id="configCode"></pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">5</span>Finaliser la Configuration</h3>
+                <p>Installez le fichier de configuration et testez l'interface admin.</p>
+                
+                <div class="highlight">
+                    <strong>Instructions :</strong>
+                    <ol>
+                        <li>Remplacez le fichier <code>google-config.js</code> par le fichier téléchargé</li>
+                        <li>Ouvrez <code>admin.html</code> dans votre navigateur</li>
+                        <li>Connectez-vous avec : <code>ldk_admin</code> / <code>ldk2024_admin</code></li>
+                        <li>Allez dans l'onglet "Google Sheets"</li>
+                        <li>Cliquez sur "Tester la connexion"</li>
+                    </ol>
+                </div>
+
+                <div class="links">
+                    <div class="link-card">
+                        <a href="admin.html">Interface Admin</a>
+                    </div>
+                    <div class="link-card">
+                        <a href="GOOGLE_SETUP_GUIDE.md">Guide Détaillé</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let generatedConfig = null;
+
+        function generateConfig() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const clientId = document.getElementById('clientId').value.trim();
+
+            if (!apiKey || !clientId) {
+                showStatus('Veuillez remplir tous les champs.', 'error');
+                return;
+            }
+
+            if (!apiKey.startsWith('AIza')) {
+                showStatus('Format de clé API invalide. La clé doit commencer par "AIza".', 'error');
+                return;
+            }
+
+            if (!clientId.includes('.apps.googleusercontent.com')) {
+                showStatus('Format de Client ID invalide. L\'ID doit contenir ".apps.googleusercontent.com".', 'error');
+                return;
+            }
+
+            generatedConfig = `// Configuration Google API pour LDK Admin
+// Généré automatiquement le ${new Date().toLocaleString('fr-FR')}
+
+const GOOGLE_API_CONFIG = {
+    // Clé API Google (obtenue depuis Google Cloud Console)
+    API_KEY: '${apiKey}',
+    
+    // Client ID OAuth 2.0 (obtenu depuis Google Cloud Console)
+    CLIENT_ID: '${clientId}',
+    
+    // Scopes nécessaires pour l'API Google Sheets
+    SCOPES: [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive.file'
+    ],
+    
+    // Configuration par défaut des feuilles
+    DEFAULT_SHEET_CONFIG: {
+        title: 'LDK Données',
+        sheets: [
+            { properties: { title: 'reservations' } },
+            { properties: { title: 'partenariats' } },
+            { properties: { title: 'contacts' } },
+            { properties: { title: 'newsletters' } }
+        ]
+    }
+};
+
+// Export pour utilisation dans d'autres fichiers
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = GOOGLE_API_CONFIG;
+}`;
+
+            document.getElementById('configCode').textContent = generatedConfig;
+            document.getElementById('configPreview').style.display = 'block';
+            document.getElementById('downloadBtn').disabled = false;
+            
+            showStatus('Configuration générée avec succès ! Vous pouvez maintenant télécharger le fichier.', 'success');
+        }
+
+        function downloadConfig() {
+            if (!generatedConfig) {
+                showStatus('Aucune configuration générée.', 'error');
+                return;
+            }
+
+            const blob = new Blob([generatedConfig], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'google-config.js';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showStatus('Fichier téléchargé avec succès ! Remplacez le fichier google-config.js existant.', 'success');
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
