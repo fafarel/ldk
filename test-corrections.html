@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test des Corrections LDK</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .test-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+        }
+
+        .test-item.error {
+            border-left-color: #dc3545;
+        }
+
+        .test-item.warning {
+            border-left-color: #ffc107;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-check-circle"></i> Test des Corrections LDK</h1>
+        <p>Vérification des corrections apportées pour ldconcep.fun</p>
+
+        <div class="test-item">
+            <h3>1. Identifiants d'Authentification</h3>
+            <p>Test des nouveaux identifiants admin</p>
+            <a href="admin.html" class="btn">Tester Admin</a>
+            <span class="status success">Nouveaux identifiants : admin / ldk2024</span>
+        </div>
+
+        <div class="test-item">
+            <h3>2. Logo NXT</h3>
+            <p>Vérification du logo NXT dans la page des dérivés</p>
+            <a href="derives.html" class="btn">Voir Dérivés</a>
+            <span class="status success">Logo NXT intégré depuis photoabout/photo NXT.jpg</span>
+        </div>
+
+        <div class="test-item">
+            <h3>3. Configuration Google pour ldconcep.fun</h3>
+            <p>Configuration OAuth pour le domaine de production</p>
+            <a href="google-config-production.js" class="btn">Voir Config</a>
+            <span class="status success">Domaines configurés : ldconcep.fun</span>
+        </div>
+
+        <div class="test-item">
+            <h3>4. Site Principal</h3>
+            <p>Test du site principal avec boutons corrigés</p>
+            <a href="index.html" class="btn">Voir Site</a>
+            <span class="status success">Boutons fonctionnels</span>
+        </div>
+
+        <div class="test-item">
+            <h3>5. Documentation Mise à Jour</h3>
+            <p>Guides mis à jour avec les nouvelles informations</p>
+            <a href="DEPLOYMENT_GUIDE.md" class="btn">Guide Déploiement</a>
+            <a href="ADMIN_SETUP.md" class="btn">Guide Admin</a>
+            <span class="status success">Documentation mise à jour</span>
+        </div>
+
+        <div class="test-item">
+            <h3>6. Configuration OAuth Google Cloud</h3>
+            <p>Paramètres à configurer dans Google Cloud Console</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <strong>URIs de redirection autorisées :</strong><br>
+                • https://ldconcep.fun<br>
+                • https://ldconcep.fun/admin.html<br><br>
+                <strong>Domaines autorisés :</strong><br>
+                • ldconcep.fun<br>
+                • www.ldconcep.fun
+            </div>
+            <span class="status warning">À configurer dans Google Cloud Console</span>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <h3>🚀 Prochaines Étapes</h3>
+            <ol style="text-align: left; display: inline-block;">
+                <li>Configurer OAuth dans Google Cloud Console</li>
+                <li>Déployer sur ldconcep.fun</li>
+                <li>Tester l'accès admin</li>
+                <li>Tester l'intégration Google Sheets</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="START_HERE.html" class="btn">Retour au Démarrage</a>
+            <a href="admin.html" class="btn">Interface Admin</a>
+        </div>
+    </div>
+
+    <script>
+        // Test automatique des fichiers
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== Test des Corrections LDK ===');
+            console.log('Domaine de production : ldconcep.fun');
+            console.log('Identifiants admin : admin / ldk2024');
+            console.log('Logo NXT : photoabout/photo NXT.jpg');
+            console.log('Configuration OAuth : google-config-production.js');
+        });
+    </script>
+</body>
+</html>

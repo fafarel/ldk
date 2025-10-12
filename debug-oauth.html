@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic OAuth - ldconcep.fun</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .error-box {
+            background: rgba(220, 53, 69, 0.3);
+            border-left-color: #dc3545;
+        }
+
+        .success-box {
+            background: rgba(40, 167, 69, 0.3);
+            border-left-color: #28a745;
+        }
+
+        .code-block {
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            background: #007bff;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-bug"></i> Diagnostic OAuth - ldconcep.fun</h1>
+        <p>Diagnostic de l'erreur redirect_uri_mismatch</p>
+
+        <div class="error-box">
+            <h3>🚨 Erreur Actuelle</h3>
+            <p><strong>Erreur 400 : redirect_uri_mismatch</strong></p>
+            <p>Cette erreur indique que l'URI de redirection dans votre configuration OAuth ne correspond pas exactement à ce qui est configuré dans Google Cloud Console.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 Informations de Diagnostic</h3>
+            <div class="code-block">
+                <strong>URL actuelle :</strong> <span id="currentUrl"></span><br>
+                <strong>Domaine :</strong> ldconcep.fun<br>
+                <strong>Client ID :</strong> 294945403393-a6bm34sbokns85ak9rrh5ql7qnj0sslt.apps.googleusercontent.com<br>
+                <strong>Timestamp :</strong> <span id="timestamp"></span>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>🔧 Solution Étape par Étape</h3>
+            <ol>
+                <li><strong>Allez dans Google Cloud Console</strong>
+                    <div class="code-block">
+                        <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="color: #ffc107;">
+                            https://console.cloud.google.com/apis/credentials
+                        </a>
+                    </div>
+                </li>
+                
+                <li><strong>Sélectionnez votre projet</strong> (celui qui contient votre Client ID)</li>
+                
+                <li><strong>Cliquez sur votre Client ID OAuth 2.0</strong>
+                    <div class="code-block">
+                        Client ID: 294945403393-a6bm34sbokns85ak9rrh5ql7qnj0sslt.apps.googleusercontent.com
+                    </div>
+                </li>
+                
+                <li><strong>Dans "URIs de redirection autorisées", ajoutez EXACTEMENT :</strong>
+                    <div class="code-block">
+                        https://ldconcep.fun<br>
+                        https://ldconcep.fun/admin.html
+                    </div>
+                </li>
+                
+                <li><strong>Supprimez toutes les autres URIs de redirection</strong> (localhost, etc.)</li>
+                
+                <li><strong>Dans "Domaines autorisés", ajoutez :</strong>
+                    <div class="code-block">
+                        ldconcep.fun<br>
+                        www.ldconcep.fun
+                    </div>
+                </li>
+                
+                <li><strong>Cliquez sur "ENREGISTRER"</strong></li>
+                
+                <li><strong>Attendez 5-10 minutes</strong> pour que les changements prennent effet</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h3>⚠️ Points Importants</h3>
+            <ul>
+                <li>Les URIs doivent être <strong>exactement</strong> comme indiqué (avec https://)</li>
+                <li>Ne pas ajouter de slash final (/) à la fin</li>
+                <li>Supprimer toutes les URIs de localhost ou autres domaines</li>
+                <li>Les changements peuvent prendre quelques minutes à prendre effet</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>✅ Après Configuration</h3>
+            <p>Une fois la configuration mise à jour dans Google Cloud Console :</p>
+            <ol>
+                <li>Attendez 5-10 minutes</li>
+                <li>Retournez à l'interface admin</li>
+                <li>Testez la connexion Google Sheets</li>
+                <li>L'erreur redirect_uri_mismatch devrait être résolue</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="btn btn-primary">
+                <i class="fas fa-external-link-alt"></i> Ouvrir Google Cloud Console
+            </a>
+            <a href="admin.html" class="btn btn-warning">
+                <i class="fas fa-cog"></i> Retour à l'Admin
+            </a>
+            <button onclick="testOAuth()" class="btn">
+                <i class="fas fa-test-tube"></i> Tester OAuth
+            </button>
+        </div>
+
+        <div id="testResult" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // Afficher les informations de diagnostic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('currentUrl').textContent = window.location.href;
+            document.getElementById('timestamp').textContent = new Date().toLocaleString('fr-FR');
+        });
+
+        // Test OAuth
+        function testOAuth() {
+            const testResult = document.getElementById('testResult');
+            testResult.innerHTML = '<div class="info-box"><h3>🧪 Test OAuth en cours...</h3><p>Vérification de la configuration...</p></div>';
+            
+            // Vérifier la configuration
+            setTimeout(() => {
+                if (typeof GOOGLE_API_CONFIG !== 'undefined') {
+                    testResult.innerHTML = `
+                        <div class="success-box">
+                            <h3>✅ Configuration Détectée</h3>
+                            <p>Le fichier de configuration est chargé.</p>
+                            <div class="code-block">
+                                Client ID: ${GOOGLE_API_CONFIG.CLIENT_ID}<br>
+                                API Key: ${GOOGLE_API_CONFIG.API_KEY.substring(0, 20)}...
+                            </div>
+                            <p><strong>Prochaine étape :</strong> Vérifiez que les URIs de redirection sont correctement configurées dans Google Cloud Console.</p>
+                        </div>
+                    `;
+                } else {
+                    testResult.innerHTML = `
+                        <div class="error-box">
+                            <h3>❌ Configuration Non Trouvée</h3>
+                            <p>Le fichier google-config.js n'est pas chargé.</p>
+                        </div>
+                    `;
+                }
+            }, 1000);
+        }
+
+        // Log des informations pour debug
+        console.log('=== Diagnostic OAuth ldconcep.fun ===');
+        console.log('URL actuelle:', window.location.href);
+        console.log('Domaine:', window.location.hostname);
+        console.log('Client ID attendu:', '294945403393-a6bm34sbokns85ak9rrh5ql7qnj0sslt.apps.googleusercontent.com');
+    </script>
+
+    <!-- Charger la configuration si disponible -->
+    <script src="google-config.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cœur - LDK | Legendary Dream of Kermess</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logooldk/logo-ldk.png.png" alt="Logo LDK" class="nav-logo-img">
+                <div class="logo-text">
+                    <span class="logo-subtitle">Legendary Dream of Kermess</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#activites" class="nav-link">Activités</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#partenaires" class="nav-link">Partenaires</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#billets" class="nav-link">Billets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="influenceurs.html" class="nav-link">Ambassadeurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="derives.html" class="nav-link">Dérivés</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#rejoindre" class="nav-link">Rejoindre l'équipe</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Cœur de LDK</h1>
+                <h2 class="hero-subtitle">L'équipe qui fait avancer le projet</h2>
+                <p class="hero-description">Découvrez les personnes passionnées qui travaillent chaque jour pour faire de LDK un événement exceptionnel pour la jeunesse ivoirienne.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Rejoindre l'équipe -->
+    <section class="rejoindre-equipe" id="rejoindre">
+        <div class="container">
+            <div class="rejoindre-wrapper">
+                <div class="rejoindre-illustration">
+                    <img src="photoabout/affiche de recrutement.png" alt="Affiche de recrutement LDK">
+                </div>
+                <div class="rejoindre-content">
+                    <h2 class="section-title">Rejoindre l'équipe</h2>
+                    <p>
+                        Tu veux contribuer à un projet culturel ambitieux et porteur d'impact pour la jeunesse ivoirienne ?
+                        Rejoins le cœur de l'organisation LDK et mets tes talents au service d'un événement inoubliable.
+                    </p>
+                    <ul class="rejoindre-points">
+                        <li>Organisation et logistique d'événements</li>
+                        <li>Communication et réseaux sociaux</li>
+                        <li>Partenariats et sponsoring</li>
+                        <li>Création visuelle et audiovisuelle</li>
+                    </ul>
+                    <div class="rejoindre-actions">
+                        <button type="button" class="btn btn-primary" onclick="openApplyModal()">Postuler maintenant</button>
+                        <a class="btn btn-secondary" href="#contact">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modale de Candidature -->
+    <div id="applyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeApplyModal()">&times;</span>
+            <h2>Rejoindre l'équipe LDK</h2>
+            <form id="applyForm" class="reservation-form">
+                <div class="form-group">
+                    <label for="applyNom">Nom complet *</label>
+                    <input type="text" id="applyNom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyEmail">Email *</label>
+                    <input type="email" id="applyEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyTelephone">Téléphone *</label>
+                    <input type="tel" id="applyTelephone" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label for="applyDomaine">Domaine souhaité *</label>
+                    <select id="applyDomaine" name="domaine" required>
+                        <option value="">Sélectionnez un domaine</option>
+                        <option value="organisation">Organisation & Logistique</option>
+                        <option value="communication">Communication & Réseaux Sociaux</option>
+                        <option value="partenariats">Partenariats & Sponsoring</option>
+                        <option value="creation">Création visuelle / Audiovisuel</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="applyMessage">Pourquoi veux-tu rejoindre LDK ? *</label>
+                    <textarea id="applyMessage" name="message" rows="4" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeApplyModal()">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Envoyer la candidature</button>
+                </div>
+                <p style="margin-top:10px; font-size: 0.9rem; color:#856404; background:#fff3cd; padding:10px; border-radius:6px;">
+                    Ce formulaire n'est pas encore fonctionnel. Pour postuler ou nous écrire, veuillez nous contacter au <strong>+225 05 04 05 01 01</strong> / <strong>+225 25 20 01 08 30</strong> ou par email à <strong>ldkprojet@gmail.com</strong>.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section Actionnaires -->
+    <section class="actionnaires">
+        <div class="container">
+            <h2 class="section-title">Nos Actionnaires</h2>
+            <div class="actionnaires-intro">
+                <p>LDK bénéficie du soutien précieux d'actionnaires visionnaires qui croient en notre mission de développement de la jeunesse ivoirienne.</p>
+            </div>
+            
+            <div class="actionnaires-grid">
+                <div class="actionnaire-card">
+                    <div class="actionnaire-image">
+                        <img src="photoabout/photo nancy sika.jpg" alt="Mme Nancy SIKA">
+                    </div>
+                    <div class="actionnaire-info">
+                        <h3>Mme Nancy SIKA</h3>
+                        <p class="actionnaire-role">Actionnaire</p>
+                        <p class="actionnaire-description">Femme d'affaires engagée, Mme Sika apporte son expertise et son soutien au développement de LDK pour la jeunesse ivoirienne.</p>
+                        <div class="actionnaire-stats">
+                            <span class="stat">Investissement: x%</span>
+                            <span class="stat">Depuis: 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actionnaire-card">
+                    <div class="actionnaire-image">
+                        <img src="photoabout/photo koko aurelie.jpg" alt="Mlle Koko Aurelie">
+                    </div>
+                    <div class="actionnaire-info">
+                        <h3>Mlle Koko Aurelie</h3>
+                        <p class="actionnaire-role">Actionnaire</p>
+                        <p class="actionnaire-description">Jeune étudiante en économie, Mlle Koko partage notre passion pour l'innovation et le développement culturel de la jeunesse.</p>
+                        <div class="actionnaire-stats">
+                            <span class="stat">Investissement: x%</span>
+                            <span class="stat">Depuis: 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Parrains -->
+    <section class="parrains">
+        <div class="container">
+            <h2 class="section-title">Nos Parrains</h2>
+            <div class="parrains-intro">
+                <p>Des personnalités influentes qui soutiennent et accompagnent LDK dans sa mission de développement de la jeunesse ivoirienne.</p>
+            </div>
+            
+            <div class="parrains-grid">
+                <div class="parrain-card">
+                    <div class="parrain-image">
+                        <img src="photoabout/Hassan Hayek.jpg" alt="Hassan Hayek">
+                    </div>
+                    <div class="parrain-info">
+                        <h3>Hassan Hayek</h3>
+                        <p class="parrain-role">Parrain de LDK</p>
+                        <p class="parrain-description">Personnalité influente et engagée, Hassan Hayek apporte son soutien et son expertise au développement de LDK pour la jeunesse ivoirienne.</p>
+                        <div class="parrain-stats">
+                            <span class="stat">Parrain depuis: 2025</span>
+                            <span class="stat">Engagement: Soutien moral et financier</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Équipe d'Organisation -->
+    <section class="equipe-organisation">
+        <div class="container">
+            <h2 class="section-title">Équipe d'Organisation</h2>
+            <div class="equipe-intro">
+                <p>Une équipe dynamique et passionnée, composée d'étudiants, de professionnels et de mentors, tous unis par la même vision : créer un événement inoubliable pour la jeunesse ivoirienne.</p>
+            </div>
+
+            <!-- Direction Générale -->
+            <div class="equipe-categorie">
+                <h3 class="categorie-title">Direction Générale</h3>
+                <div class="equipe-grid">
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/Farel N.jpeg" alt="Farel NGUESSAN">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Farel NGUESSAN</h4>
+                            <p class="membre-role">Responsable Sponsoring</p>
+                            <p class="membre-description"> en charge des partenariats et financement, Farel développe les relations avec les sponsors et partenaires.</p>
+                            <div class="membre-contact">
+                                <i class="fas fa-phone"></i>
+                                <span>+225 05 04 05 01 01</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo Maurel irina.png" alt="Maurel Irina AKESSE">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Maurel Irina AKESSE</h4>
+                            <p class="membre-role">Directrice Générale</p>
+                            <p class="membre-description">Visionnaire et leader, Maurel coordonne l'ensemble du projet LDK avec passion et détermination.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo jean christ.jpg" alt="Kouadio Jean Christ">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Kouadio Jean Christ</h4>
+                            <p class="membre-role">Adjoint de la Directrice & Responsable Terrain</p>
+                            <p class="membre-description">Coordinateur opérationnel, il assure la supervision de toutes les activités sur le terrain.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/phto tewis.jpg" alt="N'goran Tewis">
+                        </div>
+                        <div class="membre-info">
+                            <h4>N'goran Tewis</h4>
+                            <p class="membre-role">Responsable Innovation</p>
+                            <p class="membre-description"> apporte une vision innovante et moderne aux activités de l'événement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comité d'Organisation -->
+            <div class="equipe-categorie">
+                <h3 class="categorie-title">Comité d'Organisation</h3>
+                <div class="equipe-grid">
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo florence k.jpg" alt="Florence KOUAME">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mme Florence KOUAME</h4>
+                            <p class="membre-role">Professeur d'Expression Professionnelle</p>
+                            <p class="membre-description">Mentor pédagogique, elle guide l'équipe dans la communication et la présentation professionnelle.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/bationon grace.jpg" alt="Bationon Grace">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Bationon Grace</h4>
+                            <p class="membre-role">Entrepreneuse </p>
+                            <p class="membre-description">doté d'une rigueur sans faille, Grace s'occupe de l'accueil des invités et gestion de la  préséance de l'événement</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo malick soro.jpeg" alt="Malick SORO">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Malick SORO</h4>
+                            <p class="membre-role"> Médecin</p>
+                            <p class="membre-description">Responsable de la sécurité et des premiers secours, il veille au bien-être de tous les participants.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Équipe Étudiante -->
+            <div class="equipe-categorie">
+                <h3 class="categorie-title">Équipe </h3>
+                <div class="equipe-grid">
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo jemima coulibaly.jpg" alt="Jemima COULIBALY">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Jemima COULIBALY</h4>
+                            <p class="membre-role">Étudiante en Licence 3 de Droit Privé</p>
+                            <p class="membre-description">Responsable juridique et administrative, elle assure la conformité légale de l'événement.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/ANGE NIAMé.jpeg" alt="Ange NIAMÉ">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Ange NIAMÉ</h4>
+                            <p class="membre-role">Étudiant en Licence 2 de Marketing Digital et Communication</p>
+                            <p class="membre-description">Responsable de la communication digitale et de la stratégie marketing de l'événement.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo alex p.jpeg" alt="Alex POMOIN">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Alex POMOIN</h4>
+                            <p class="membre-role">Étudiant en Licence 2 d'Économie Appliquée</p>
+                            <p class="membre-description">Responsable de l'analyse économique et de la viabilité financière du projet.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/oxane.jpg" alt="Oxane GBEKIDE">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Oxane GBEKIDE</h4>
+                            <p class="membre-role">Étudiante en Licence 3 de Communication Visuelle</p>
+                            <p class="membre-description">Responsable de l'identité visuelle, du design et de la création graphique de l'événement.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo ange annick.jpeg" alt="ange annick">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Ange Annick</h4>
+                            <p class="membre-role">étudiante en gestion comptabilité</p>
+                            <p class="membre-description">assure la transparence et la rigueur budgétaire du projet.</p>
+                        </div>
+                    </div>
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/moriel.jpeg" alt="Moriel">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Moriel </h4>
+                            <p class="membre-role">BTS en Génie civil option bâtiment</p>
+                            <p class="membre-description"> apporte ses compétences techniques au développement du projet.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/Aziz soro.jpeg" alt="Aziz SORO">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Aziz SORO</h4>
+                            <p class="membre-role">Entrepreneur</p>
+                            <p class="membre-description">Entrepreneur dynamique, il s'occupe des activités de mode et apporte son expertise dans le secteur de la mode à l'événement.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo marianne.jpeg" alt="Marianne">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Marianne</h4>
+                            <p class="membre-role">Assistante de Direction</p>
+                            <p class="membre-description">Assistante dévouée, elle apporte son soutien administratif et organisationnel à la direction générale.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo elsa k.jpg" alt="Elsa KOUASSI">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mlle Elsa KOUASSI</h4>
+                            <p class="membre-role">Membre de l'équipe Communication</p>
+                            <p class="membre-description">Membre active de l'équipe communication, elle contribue à la stratégie de communication et à la visibilité de l'événement.</p>
+                        </div>
+                    </div>
+
+                    <div class="membre-card">
+                        <div class="membre-image">
+                            <img src="photoabout/photo kra lael.jpeg" alt="Kra Laël">
+                        </div>
+                        <div class="membre-info">
+                            <h4>Mr Kra Laël</h4>
+                            <p class="membre-role">Licence 2 en Pratique théâtrale</p>
+                            <p class="membre-description">Étudiant en théâtre, il apporte sa créativité artistique et ses compétences scéniques à l'organisation des activités culturelles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Valeurs -->
+    <section class="valeurs">
+        <div class="container">
+            <h2 class="section-title">Nos Valeurs</h2>
+            <div class="valeurs-grid">
+                <div class="valeur-card">
+                    <div class="valeur-icon">🎯</div>
+                    <h3>Excellence</h3>
+                    <p>Nous nous engageons à offrir une expérience exceptionnelle à chaque participant.</p>
+                </div>
+                <div class="valeur-card">
+                    <div class="valeur-icon">🤝</div>
+                    <h3>Collaboration</h3>
+                    <p>Nous croyons en la force du travail d'équipe et de la collaboration intergénérationnelle.</p>
+                </div>
+                <div class="valeur-card">
+                    <div class="valeur-icon">🌟</div>
+                    <h3>Innovation</h3>
+                    <p>Nous innovons constamment pour créer des expériences uniques et mémorables.</p>
+                </div>
+                <div class="valeur-card">
+                    <div class="valeur-icon">❤️</div>
+                    <h3>Impact Social</h3>
+                    <p>Nous nous engageons à avoir un impact positif durable sur la communauté.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="logooldk/logo-ldk.png.png" alt="Logo LDK" class="footer-logo-img">
+                    </div>
+                    <h3>LDK</h3>
+                    <p>Legendary Dream of Kermess</p>
+                    <p>L'événement culturel qui célèbre la jeunesse ivoirienne</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#activites">Activités</a></li>
+                        <li><a href="index.html#partenaires">Partenaires</a></li>
+                        <li><a href="index.html#billets">Billets</a></li>
+                        <li><a href="influenceurs.html">Ambassadeurs</a></li>
+                        <li><a href="derives.html">Dérivés</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/p/DLNAzXfKmdR/?img_index=1" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.snapchat.com/add/projetldk?share_id=Og_PF4MdQ1o&locale=fr-CI" target="_blank" rel="noopener"><i class="fab fa-snapchat-ghost"></i></a>
+                        <a href="https://www.tiktok.com/@projetldk?lang=fr" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Impact Social</h4>
+                    <p>Réhabilitation de bâtiments dans des écoles primaires.</p>
+                    <p>Réinvestissement des bénéfices dans :</p>
+                    <ul>
+                        <li> les Services sociaux des établissements</li>
+                        <li> les club scolaires</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LDK - Legendary Dream of Kermess. Tous droits réservés.</p>
+                <p>Organisé par le comité LDK avec le soutien des établissements partenaires</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="geolocation-tracker.js"></script>
+</body>
+</html>
