@@ -36,11 +36,39 @@
 
     <section class="influenceurs" style="padding-top:120px;">
         <div class="container">
-            <h2 class="section-title">Espace Influenceurs</h2>
-            <div class="influenceurs-grid">
+            <h2 class="section-title">Espace Ambassadeurs</h2>
+            <div class="influenceurs-grid" id="ambassadeursGrid">
+                <!-- Kimora - Ambassadrice en chef -->
+                <div class="influenceur-card ambassadrice-chef">
+                    <div class="influencer-media">
+                        <video src="photoamb/kimora.mp4" preload="metadata" muted playsinline></video>
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Kimora</h3>
+                        <p class="ambassadrice-badge">Ambassadrice en Chef</p>
+                        <a class="follow-btn" href="https://www.tiktok.com/@kimora_0tr2?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conteneur pour les autres cartes -->
+                <div class="influenceurs-others">
+                    <!-- Autres cartes -->
+                    <div class="influenceur-card">
+                        <div class="influencer-media">
+                            <video src="photoamb/Carla.mp4" preload="metadata" muted playsinline loop></video>
+                        </div>
+                        <div class="influencer-overlay">
+                            <h3>Carla</h3>
+                            <a class="follow-btn" href="https://www.tiktok.com/@carlaa_gmr" target="_blank" rel="noopener">
+                                <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                            </a>
+                        </div>
+                    </div>
                 <div class="influenceur-card">
                     <div class="influencer-media">
-                        <img src="photoamb/Orianne Ouattara.jpg" alt="Orianne Ouattara">
+                        <video src="photoamb/Orianne Ouattara.mp4" preload="metadata" muted playsinline></video>
                     </div>
                     <div class="influencer-overlay">
                         <h3>Orianne Ouattara</h3>
@@ -52,23 +80,11 @@
 
                 <div class="influenceur-card">
                     <div class="influencer-media">
-                        <video src="photoamb/Kemenn.mp4" preload="metadata" muted playsinline></video>
+                        <video src="photoamb/Kemenn.mp4" preload="metadata" muted playsinline loop></video>
                     </div>
                     <div class="influencer-overlay">
                         <h3>Kemenn</h3>
-                        <a class="follow-btn" href="https://www.tiktok.com/@kemennnn_nn?lang=fr" target="_blank" rel="noopener">
-                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
-                        </a>
-                    </div>
-                </div>
-
-                <div class="influenceur-card">
-                    <div class="influencer-media">
-                        <video src="photoamb/Carla.mp4" preload="metadata" muted playsinline></video>
-                    </div>
-                    <div class="influencer-overlay">
-                        <h3>Carla</h3>
-                        <a class="follow-btn" href="https://www.tiktok.com/@carlaa_gmr?lang=fr" target="_blank" rel="noopener">
+                        <a class="follow-btn" href="https://www.tiktok.com/@kemennnn_nn" target="_blank" rel="noopener">
                             <i class="fab fa-tiktok"></i> Suis-les sur TikTok
                         </a>
                     </div>
@@ -84,6 +100,19 @@
                             <i class="fab fa-tiktok"></i> Suis-les sur TikTok
                         </a>
                     </div>
+                </div>
+
+                <div class="influenceur-card">
+                    <div class="influencer-media">
+                        <video src="photoamb/Axelle Eunice.mp4" preload="metadata" muted playsinline loop></video>
+                    </div>
+                    <div class="influencer-overlay">
+                        <h3>Axelle Eunice</h3>
+                        <a class="follow-btn" href="https://www.tiktok.com/@axelle27105?lang=fr" target="_blank" rel="noopener">
+                            <i class="fab fa-tiktok"></i> Suis-les sur TikTok
+                        </a>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -128,11 +157,52 @@
                 card.addEventListener('mouseleave', () => { try { video.pause(); video.currentTime = 0; } catch(e){} });
             });
         });
+
     </script>
+    <style>
+        .influenceurs-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        .ambassadrice-chef {
+            border: 3px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 2rem;
+        }
+        
+        .influenceurs-others {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        .influenceur-card {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .ambassadrice-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 10px 0;
+            display: inline-block;
+        }
+    </style>
 </body>
 </html>
-
-
 
 
 
