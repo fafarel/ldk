@@ -418,6 +418,19 @@
                             <p class="membre-description">Étudiant en théâtre, il apporte sa créativité artistique et ses compétences scéniques à l'organisation des activités culturelles.</p>
                         </div>
                     </div>
+
+                    <div class="membre-card kimora-card" style="border: 3px solid #667eea; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                        <div class="membre-image">
+                            <img src="photoamb/photo kimora.jpg" alt="Kimora" class="kimora-photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
+                            <video src="photoamb/kimora.mp4" poster="photoamb/photo kimora.jpg" preload="metadata" muted playsinline class="kimora-video" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: none;"></video>
+                        </div>
+                        <div class="membre-info">
+                            <h4>Kimora</h4>
+                            <p class="membre-role" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; font-weight: 600; display: inline-block; margin: 5px 0;">Ambassadrice en Chef</p>
+                            <p class="membre-description">Ambassadrice en chef de LDK, Kimora représente l'événement avec passion et engagement, contribuant à la visibilité et au succès de LDK.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -502,5 +515,32 @@
 
     <script src="script.js"></script>
     <script src="geolocation-tracker.js"></script>
+    <script>
+        // Gestion de la vidéo de Kimora : photo par défaut, vidéo au survol
+        document.addEventListener('DOMContentLoaded', function(){
+            const kimoraCard = document.querySelector('.kimora-card');
+            if (kimoraCard) {
+                const photo = kimoraCard.querySelector('.kimora-photo');
+                const video = kimoraCard.querySelector('.kimora-video');
+                
+                if (photo && video) {
+                    kimoraCard.addEventListener('mouseenter', () => {
+                        photo.style.display = 'none';
+                        video.style.display = 'block';
+                        try { video.play(); } catch(e){}
+                    });
+                    
+                    kimoraCard.addEventListener('mouseleave', () => {
+                        try { 
+                            video.pause(); 
+                            video.currentTime = 0; 
+                        } catch(e){}
+                        video.style.display = 'none';
+                        photo.style.display = 'block';
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
